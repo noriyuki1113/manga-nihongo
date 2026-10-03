@@ -81,6 +81,8 @@ a {
 }
 ruby {
   ruby-position: over;
+  /* Keep the base word together when its reading is wider (default spreads it out). */
+  ruby-align: center;
 }
 rt {
   font-size: 0.5em;
