@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0d12;
+  --surface: #151820;
+  --surface-2: #1c202b;
+  --line: rgba(255, 255, 255, 0.09);
+  --fg: #f5f6fa;
+  --muted: #a3aabb;
+  --coral: #ff6b81;
+  --coral-deep: #e8465f;
+  --mint: #6ee7c8;
+  --sky: #7dd3fc;
+  --paper: #fffaf2;
+  --ink: #1b1620;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --nav-h: 64px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-coral: var(--coral);
+  --color-coral-deep: var(--coral-deep);
+  --color-mint: var(--mint);
+  --color-sky: var(--sky);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --font-sans:
+    ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic",
+    Meiryo, "Segoe UI", Roboto, sans-serif;
+  --font-display:
+    ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont,
+    "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+html {
+  background: var(--bg);
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Ruby text: keep the line height steady whether or not furigana is shown. */
+.jp {
+  line-height: 2.1;
+  line-break: strict;
+  overflow-wrap: break-word;
+  word-break: normal;
+  /* Chromium: break at phrase boundaries instead of mid-word. Ignored elsewhere. */
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+ruby {
+  ruby-position: over;
+}
+rt {
+  font-size: 0.5em;
+  letter-spacing: 0;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Hide scrollbars in horizontal-free content areas */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes sheet-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes tap-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(110, 231, 200, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(110, 231, 200, 0);
+  }
+}
+
+@utility animate-sheet-up {
+  animation: sheet-up 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@utility animate-sheet-down {
+  animation: sheet-down 200ms ease-in forwards;
+}
+@utility animate-fade-in {
+  animation: fade-in 200ms ease-out;
+}
+@utility animate-fade-out {
+  animation: fade-out 160ms ease-in forwards;
+}
+@utility animate-pop-in {
+  animation: pop-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@utility tap-pulse {
+  animation: tap-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .tap-pulse {
+    animation: none;
+  }
+}
