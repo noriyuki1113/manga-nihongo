@@ -43,7 +43,8 @@ export function SpeechBubble({ dialogue, mode, onExpressionTap }: Props) {
       <div
         className={cn(
           "relative max-w-[88%] border-2 border-ink bg-paper px-4 py-2.5 text-ink shadow-[3px_3px_0_0_rgba(27,22,32,0.9)]",
-          isThought ? "rounded-[28px] border-dashed" : "rounded-[22px]",
+          // Thought bubbles leave room above for the trailing dots so they don't cover the name.
+          isThought ? "mt-4 rounded-[28px] border-dashed" : "rounded-[22px]",
           isAlex ? "rounded-tl-md" : "rounded-tr-md",
         )}
       >
